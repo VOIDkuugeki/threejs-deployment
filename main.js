@@ -444,7 +444,7 @@ objLoader.load(
 );
 
 // Load the texture
-const texture2 = textureLoader.load('Tree1/Leaves0120_35_S.png');
+const texture2 = textureLoader.load('Tree1/distLeaves0120_35_S.png');
 // Create a basic material with the loaded texture
 const material2 = new THREE.MeshPhongMaterial({
     map: texture2,
@@ -517,8 +517,8 @@ function onMouseMove(event) {
     var deltaY = event.clientY - mouse.y;
 
     // Update camera position within the range of -1000 to 1000
-    camera.position.x = Math.max(-1000, Math.min(1000, camera.position.x - deltaX));
-    camera.position.y = Math.max(-1000, Math.min(1000, camera.position.y + deltaY));
+    camera.position.x = Math.max(-500, Math.min(500, camera.position.x - deltaX));
+    camera.position.y = Math.max(-500, Math.min(500, camera.position.y + deltaY));
 
     // Update the mouse position
     mouse.x = event.clientX;
