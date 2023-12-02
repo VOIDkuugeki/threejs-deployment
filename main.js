@@ -33,16 +33,18 @@ controls.touches = {
     TWO: THREE.TOUCH.DOLLY_PAN
 }
 
-// Set constraints for the controls
-controls.maxPolarAngle = Math.PI / 2; // Don't allow camera to go below the horizon
-controls.minPolarAngle = 0; // Don't allow camera to go above the zenith
-controls.maxAzimuthAngle = Infinity; // Allow full rotation around the vertical axis
-controls.minAzimuthAngle = -Infinity; // Allow full rotation around the vertical axis
-controls.maxZoom = 10; // Set the maximum zoom level
-controls.minZoom = 1; // Set the minimum zoom level
-
 // Camera
 camera.position.set(0, 25, 75);
+
+// Set limits for camera position
+const cameraLimits = {
+    minX: -1000,
+    maxX: 1000,
+    minY: 0,
+    maxY: 1000,
+    minZ: -1000,
+    maxZ: 1000
+};
 
 // Create a Skybox
 var create_skybox = function () {
@@ -487,6 +489,12 @@ function animate() {
     // animateSpinningCube();
     // Animation of Bubbles
     animateBubble();
+
+    // Clamp camera position within limits
+    camera.position.x = THREE.MathUtils.clamp(camera.position.x, cameraLimits.minX, cameraLimits.maxX);
+    camera.position.y = THREE.MathUtils.clamp(camera.position.y, cameraLimits.minY, cameraLimits.maxY);
+    camera.position.z = THREE.MathUtils.clamp(camera.position.z, cameraLimits.minZ, cameraLimits.maxZ);
+
 
     renderer.render(scene, camera);
 
