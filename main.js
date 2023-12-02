@@ -479,7 +479,7 @@ var create_crate = function() {
     var geometry = new THREE.BoxGeometry(5, 5, 5);
     var crate_texture = new THREE.TextureLoader().load("crate/crate0_diffuse.png");
     var bump_map_texture = new THREE.TextureLoader().load("crate/crate0_bump.png");
-    var normal_map_texture = new THREE.textureLoader().load("crate/crate0_normal.png");
+    var normal_map_texture = new THREE.TextureLoader().load("crate/crate0_normal.png");
     var material = new THREE.MeshPhongMaterial({map: crate_texture, bumpMap: bump_map_texture, normalMap: normal_map_texture});
     
     var crate = new THREE.Mesh(geometry, material);
