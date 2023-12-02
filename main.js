@@ -475,23 +475,39 @@ objLoader.load(
     }
 );
 
-var create_crate = function() {
+var create_crate = function(type) {
     var geometry = new THREE.BoxGeometry(5, 5, 5);
+
     var crate_texture = new THREE.TextureLoader().load("crate/crate0_diffuse.png");
     var bump_map_texture = new THREE.TextureLoader().load("crate/crate0_bump.png");
     var normal_map_texture = new THREE.TextureLoader().load("crate/crate0_normal.png");
-    var material = new THREE.MeshPhongMaterial({
-        // map: crate_texture,
-        bumpMap: bump_map_texture,
-        normalMap: normal_map_texture,
-    });    
-    
+
+    var material;
+
+    switch (type) {
+        case 'texture':
+            material = new THREE.MeshPhongMaterial({ map: crate_texture });
+            break;
+        case 'bump':
+            material = new THREE.MeshPhongMaterial({ bumpMap: bump_map_texture });
+            break;
+        case 'normal':
+            material = new THREE.MeshPhongMaterial({ normalMap: normal_map_texture });
+            break;
+        default:
+            material = new THREE.MeshPhongMaterial();
+            break;
+    }
+
     var crate = new THREE.Mesh(geometry, material);
-    crate.position.set(10, 10, 10);
     scene.add(crate);
 }
 
-create_crate();
+// Create boxes with different mappings
+create_crate('texture'); // Box with texture mapping
+create_crate('bump');    // Box with bump mapping
+create_crate('normal');  // Box with normal mapping
+
 
 function animate() {
     requestAnimationFrame(animate);
