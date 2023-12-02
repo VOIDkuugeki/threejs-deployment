@@ -13,6 +13,7 @@ document.body.appendChild(renderer.domElement);
 
 // Controls
 const controls = new OrbitControls(camera, renderer.domElement);
+
 controls.autoRotateSpeed = 5;
 controls.keys = {
     LEFT: 'ArrowLeft', //left arrow
@@ -31,6 +32,14 @@ controls.touches = {
     ONE: THREE.TOUCH.ROTATE,
     TWO: THREE.TOUCH.DOLLY_PAN
 }
+
+// Set constraints for the controls
+controls.maxPolarAngle = Math.PI / 2; // Don't allow camera to go below the horizon
+controls.minPolarAngle = 0; // Don't allow camera to go above the zenith
+controls.maxAzimuthAngle = Infinity; // Allow full rotation around the vertical axis
+controls.minAzimuthAngle = -Infinity; // Allow full rotation around the vertical axis
+controls.maxZoom = 10; // Set the maximum zoom level
+controls.minZoom = 1; // Set the minimum zoom level
 
 // Camera
 camera.position.set(0, 25, 75);
