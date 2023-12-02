@@ -506,8 +506,8 @@ var create_crate = function(type, position) {
 
 // Create boxes with different mappings and positions
 create_crate('texture', new THREE.Vector3(10, 10, 10));   // Box with texture mapping at position (10, 10, 10)
-create_crate('bump', new THREE.Vector3(0, 0, 0));          // Box with bump mapping at the default position (0, 0, 0)
-create_crate('normal', new THREE.Vector3(-10, -10, -10));  // Box with normal mapping at position (-10, -10, -10)
+create_crate('bump', new THREE.Vector3(20, 10, 10));          // Box with bump mapping at the default position (0, 0, 0)
+create_crate('normal', new THREE.Vector3(30, 10, 10));  // Box with normal mapping at position (-10, -10, -10)
 
 
 function animate() {
