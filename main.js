@@ -37,11 +37,11 @@ controls.touches = {
 camera.position.set(0, 25, 75);
 
 // Create ambient light
-var ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
-scene.add(ambientLight);
+// var ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
+// scene.add(ambientLight);
 
 // Create directional light
-var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(1, 1, 1).normalize();
 scene.add(directionalLight);
 
@@ -499,10 +499,10 @@ var create_crate = function(type, position) {
 
     switch (type) {
         case 'texture':
-            material = new THREE.MeshPhongMaterial({ map: crate_texture});
+            material = new THREE.MeshPhongMaterial({ map: crate_texture });
             break;
         case 'bump':
-            material = new THREE.MeshPhongMaterial({ bumpMap: bump_map_texture});
+            material = new THREE.MeshPhongMaterial({ bumpMap: bump_map_texture });
             break;
         case 'normal':
             material = new THREE.MeshPhongMaterial({ map: crate_texture, bumpMap: bump_map_texture, normalMap: normal_map_texture });
