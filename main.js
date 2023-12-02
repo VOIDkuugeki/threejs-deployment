@@ -36,6 +36,19 @@ controls.touches = {
 // Camera
 camera.position.set(0, 25, 75);
 
+// Create ambient light
+var ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
+scene.add(ambientLight);
+
+// Create directional light
+var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+directionalLight.position.set(1, 1, 1).normalize();
+scene.add(directionalLight);
+
+// // Create hemisphere light
+// var hemisphereLight = new THREE.HemisphereLight(0x000000, 0x000000, 0.5);
+// scene.add(hemisphereLight);
+
 // Create a Skybox
 var create_skybox = function () {
     // create a box geometry
@@ -83,11 +96,11 @@ var create_ground = function () {
 // Call the function to create the ground
 create_ground();
 
-// Add ambient light to illuminate the scene
-const color = 0xFFFFFF;
-const intensity = 1;
-const light = new THREE.AmbientLight(color, intensity);
-scene.add(light);
+// // Add ambient light to illuminate the scene
+// const color = 0xFFFFFF;
+// const intensity = 1;
+// const light = new THREE.AmbientLight(color, intensity);
+// scene.add(light);
 
 // Function to make a Hexagonal Pedestal
 function createHexagon(radius, height, texturePath, color, roughness, metalness) {
@@ -486,13 +499,13 @@ var create_crate = function(type, position) {
 
     switch (type) {
         case 'texture':
-            material = new THREE.MeshPhongMaterial({ map: crate_texture });
+            material = new THREE.MeshPhongMaterial({ map: crate_texture});
             break;
         case 'bump':
-            material = new THREE.MeshPhongMaterial({ bumpMap: bump_map_texture });
+            material = new THREE.MeshPhongMaterial({ bumpMap: bump_map_texture});
             break;
         case 'normal':
-            material = new THREE.MeshPhongMaterial({ normalMap: normal_map_texture });
+            material = new THREE.MeshPhongMaterial({ map: crate_texture, bumpMap: bump_map_texture, normalMap: normal_map_texture });
             break;
         default:
             material = new THREE.MeshPhongMaterial();
