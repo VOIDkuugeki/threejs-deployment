@@ -36,16 +36,6 @@ controls.touches = {
 // Camera
 camera.position.set(0, 25, 75);
 
-// Set limits for camera position
-const cameraLimits = {
-    minX: -1000,
-    maxX: 1000,
-    minY: 0,
-    maxY: 1000,
-    minZ: -1000,
-    maxZ: 1000
-};
-
 // Create a Skybox
 var create_skybox = function () {
     // create a box geometry
@@ -454,7 +444,7 @@ objLoader.load(
 );
 
 // Load the texture
-const texture2 = textureLoader.load('Tree1/Leaves0156_1_S.png');
+const texture2 = textureLoader.load('Tree1/Leaves0120_35_S.png');
 // Create a basic material with the loaded texture
 const material2 = new THREE.MeshPhongMaterial({
     map: texture2,
@@ -498,12 +488,6 @@ function animate() {
     // Animation of Bubbles
     animateBubble();
 
-    // Clamp camera position within limits
-    camera.position.x = THREE.MathUtils.clamp(camera.position.x, cameraLimits.minX, cameraLimits.maxX);
-    camera.position.y = THREE.MathUtils.clamp(camera.position.y, cameraLimits.minY, cameraLimits.maxY);
-    camera.position.z = THREE.MathUtils.clamp(camera.position.z, cameraLimits.minZ, cameraLimits.maxZ);
-
-
     renderer.render(scene, camera);
 
     controls.update();
@@ -512,6 +496,43 @@ function animate() {
 }
 
 animate();
+
+// Handle user input
+var mouse = new THREE.Vector2();
+var raycaster = new THREE.Raycaster();
+var isDragging = false;
+
+function onMouseDown(event) {
+  isDragging = true;
+}
+
+function onMouseUp(event) {
+  isDragging = false;
+}
+
+function onMouseMove(event) {
+  if (isDragging) {
+    // Calculate mouse movement
+    var deltaX = event.clientX - mouse.x;
+    var deltaY = event.clientY - mouse.y;
+
+    // Update camera position within the range of -1000 to 1000
+    camera.position.x = Math.max(-1000, Math.min(1000, camera.position.x - deltaX));
+    camera.position.y = Math.max(-1000, Math.min(1000, camera.position.y + deltaY));
+
+    // Update the mouse position
+    mouse.x = event.clientX;
+    mouse.y = event.clientY;
+
+    // Render the scene
+    renderer.render(scene, camera);
+  }
+}
+
+// Add event listeners
+window.addEventListener('mousedown', onMouseDown, false);
+window.addEventListener('mouseup', onMouseUp, false);
+window.addEventListener('mousemove', onMouseMove, false);
 
 // Handle window resize
 window.addEventListener('resize', () => {
