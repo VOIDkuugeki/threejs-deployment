@@ -475,6 +475,20 @@ objLoader.load(
     }
 );
 
+var create_crate = function() {
+    var geometry = new THREE.BoxGeometry(5, 5, 5);
+    var crate_texture = new THREE.TextureLoader().load("crate/crate0_diffuse.png");
+    var bump_map_texture = new THREE.TextureLoader().load("crate/crate0_bump.png");
+    var normal_map_texture = new THREE.textureLoader().load("crate/crate0_normal.png");
+    var material = new THREE.MeshPhongMaterial({map: crate_texture, bumpMap: bump_map_texture, normalMap: normal_map_texture});
+    
+    var crate = new THREE.Mesh(geometry, material);
+    crate.position.set(10, 10, 10);
+    scene.add(crate);
+}
+
+create_crate();
+
 function animate() {
     requestAnimationFrame(animate);
 
@@ -497,52 +511,5 @@ function animate() {
 
 animate();
 
-// Handle user input
-var mouse = new THREE.Vector2();
-var raycaster = new THREE.Raycaster();
-var isDragging = false;
-
-function onMouseDown(event) {
-  isDragging = true;
-}
-
-function onMouseUp(event) {
-  isDragging = false;
-}
-
-function onMouseMove(event) {
-  if (isDragging) {
-    // Calculate mouse movement
-    var deltaX = event.clientX - mouse.x;
-    var deltaY = event.clientY - mouse.y;
-
-    // Update camera position within the range of -1000 to 1000
-    camera.position.x = Math.max(-500, Math.min(500, camera.position.x - deltaX));
-    camera.position.y = Math.max(-500, Math.min(500, camera.position.y + deltaY));
-
-    // Update the mouse position
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
-
-    // Render the scene
-    renderer.render(scene, camera);
-  }
-}
-
-// Add event listeners
-window.addEventListener('mousedown', onMouseDown, false);
-window.addEventListener('mouseup', onMouseUp, false);
-window.addEventListener('mousemove', onMouseMove, false);
-
-// Handle window resize
-window.addEventListener('resize', () => {
-    const newWidth = window.innerWidth;
-    const newHeight = window.innerHeight;
-
-    camera.aspect = newWidth / newHeight;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(newWidth, newHeight);
-});
 
 
