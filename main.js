@@ -480,7 +480,12 @@ var create_crate = function() {
     var crate_texture = new THREE.TextureLoader().load("crate/crate0_diffuse.png");
     var bump_map_texture = new THREE.TextureLoader().load("crate/crate0_bump.png");
     var normal_map_texture = new THREE.TextureLoader().load("crate/crate0_normal.png");
-    var material = new THREE.MeshPhongMaterial({map: crate_texture, bumpMap: bump_map_texture, normalMap: normal_map_texture});
+    var material = new THREE.MeshPhongMaterial({
+        map: crate_texture, 
+        bumpMap: bump_map_texture, 
+        normalMap: normal_map_texture, 
+        bumpScale: 0.05, // Adjust the strength of the bump effect
+    });
     
     var crate = new THREE.Mesh(geometry, material);
     crate.position.set(10, 10, 10);
