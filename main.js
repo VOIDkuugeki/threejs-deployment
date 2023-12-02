@@ -444,7 +444,7 @@ objLoader.load(
 );
 
 // Load the texture
-const texture2 = textureLoader.load('Tree1/distLeaves0120_35_S.png');
+const texture2 = textureLoader.load('Tree1/Leaves0120_35_S.png');
 // Create a basic material with the loaded texture
 const material2 = new THREE.MeshPhongMaterial({
     map: texture2,
