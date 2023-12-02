@@ -424,7 +424,11 @@ const textureLoader = new THREE.TextureLoader();
 // Load the texture
 const texture = textureLoader.load('Tree1/BarkDecidious0143_5_S.jpg');
 // Create a basic material with the loaded texture
-const material = new THREE.MeshBasicMaterial({ map: texture });
+const material = new THREE.MeshPhongMaterial({
+    map: texture,
+    bumpMap: texture,
+    bumpScale: 0.05,
+});
 // Load the object
 objLoader.load(
     'Tree1/TreeA.obj',
@@ -452,7 +456,11 @@ objLoader.load(
 // Load the texture
 const texture2 = textureLoader.load('Tree1/Leaves0156_1_S.png');
 // Create a basic material with the loaded texture
-const material2 = new THREE.MeshBasicMaterial({ map: texture2 });
+const material2 = new THREE.MeshPhongMaterial({
+    map: texture2,
+    bumpMap: texture2,
+    bumpScale: 0.05, // Adjust the bumpiness
+});
 // Load the object
 objLoader.load(
     'Tree1/LeafAobj.obj',
