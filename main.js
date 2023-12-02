@@ -481,11 +481,10 @@ var create_crate = function() {
     var bump_map_texture = new THREE.TextureLoader().load("crate/crate0_bump.png");
     var normal_map_texture = new THREE.TextureLoader().load("crate/crate0_normal.png");
     var material = new THREE.MeshPhongMaterial({
-        map: crate_texture, 
-        bumpMap: bump_map_texture, 
-        normalMap: normal_map_texture, 
-        bumpScale: 0.05, // Adjust the strength of the bump effect
-    });
+        map: crate_texture,
+        bumpMap: bump_map_texture,
+        normalMap: normal_map_texture,
+    });    
     
     var crate = new THREE.Mesh(geometry, material);
     crate.position.set(10, 10, 10);
@@ -516,5 +515,15 @@ function animate() {
 
 animate();
 
+// Handle window resize
+window.addEventListener('resize', () => {
+    const newWidth = window.innerWidth;
+    const newHeight = window.innerHeight;
+
+    camera.aspect = newWidth / newHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(newWidth, newHeight);
+});
 
 
